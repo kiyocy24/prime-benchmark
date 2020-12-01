@@ -49,6 +49,13 @@ func int64ArrToBigIntarr(arr []int64) []*big.Int {
 	return r
 }
 
+func BenchmarkGenerateBig5(b *testing.B) {
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		GenarateBig(100000)
+	}
+}
+
 func BenchmarkGenerateBig6(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-const Reps = 16
+const Reps = 256
 
 var one *big.Int
 var two *big.Int
@@ -27,8 +27,7 @@ var composite16 *big.Int
 var composite83 *big.Int
 var composite340 *big.Int
 var composite1350 *big.Int
-var composite20382 *big.Int
-var composite65713 *big.Int
+var composite12535 *big.Int
 
 func TestMain(m *testing.M) {
 	one = big.NewInt(1)
@@ -53,19 +52,12 @@ func TestMain(m *testing.M) {
 	prime6987 = mersenne(23209)
 	prime13395 = mersenne(44497)
 	prime25962 = mersenne(86243)
-	prime39751 = mersenne(132049)
-	prime65050 = mersenne(216091)
-
-	prime65087 = new(big.Int).Exp(two, big.NewInt(216193), nil)
-	prime65087.Mul(prime65087, big.NewInt(391581))
-	prime65087.Sub(prime65087, one)
 
 	composite16 = big.NewInt(8635844967113809)
 	composite83 = new(big.Int).Mul(prime39, prime44)
 	composite340 = new(big.Int).Mul(mersenne(521), mersenne(607))
 	composite1350 = new(big.Int).Mul(mersenne(2203), mersenne(2281))
-	composite20382 = new(big.Int).Mul(prime6987, prime13395)
-	composite65713 = new(big.Int).Mul(prime25962, prime39751)
+	composite12535 = new(big.Int).Mul(mersenne(19937), mersenne(21701))
 
 	m.Run()
 }
@@ -300,30 +292,6 @@ func BenchmarkPrime13395(b *testing.B) {
 	}
 }
 
-func BenchmarkPrime25962(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		prime25962.ProbablyPrime(Reps)
-	}
-}
-
-func BenchmarkPrime39751(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		prime39751.ProbablyPrime(Reps)
-	}
-}
-
-func BenchmarkPrime65050(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		prime65050.ProbablyPrime(Reps)
-	}
-}
-
-func BenchmarkPrime65087(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		prime65087.ProbablyPrime(Reps)
-	}
-}
-
 func BenchmarkComposite16(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		composite16.ProbablyPrime(Reps)
@@ -348,15 +316,9 @@ func BenchmarkComposite1350(b *testing.B) {
 	}
 }
 
-func BenchmarkComposite20382(b *testing.B) {
+func BenchmarkComposite12535(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		composite20382.ProbablyPrime(Reps)
-	}
-}
-
-func BenchmarkComposite65713(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		composite65713.ProbablyPrime(Reps)
+		composite12535.ProbablyPrime(Reps)
 	}
 }
 

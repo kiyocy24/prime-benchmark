@@ -39,6 +39,13 @@ func TestGenarate(t *testing.T) {
 	}
 }
 
+func BenchmarkGenerate5(b *testing.B) {
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		Genarate(100000)
+	}
+}
+
 func BenchmarkGenerate6(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
@@ -59,3 +66,4 @@ func BenchmarkGenerate8(b *testing.B) {
 		Genarate(100000000)
 	}
 }
+
